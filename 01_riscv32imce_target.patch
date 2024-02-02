@@ -1,0 +1,42 @@
+diff --git a/compiler/rustc_target/src/spec/mod.rs b/compiler/rustc_target/src/spec/mod.rs
+index 6c698c5b01d..ca66bcc6873 100644
+--- a/compiler/rustc_target/src/spec/mod.rs
++++ b/compiler/rustc_target/src/spec/mod.rs
+@@ -1600,6 +1600,7 @@ fn $module() {
+     ("riscv32im-risc0-zkvm-elf", riscv32im_risc0_zkvm_elf),
+     ("riscv32im-unknown-none-elf", riscv32im_unknown_none_elf),
+     ("riscv32imc-unknown-none-elf", riscv32imc_unknown_none_elf),
++    ("riscv32imce-unknown-none-elf", riscv32imce_unknown_none_elf),
+     ("riscv32imc-esp-espidf", riscv32imc_esp_espidf),
+     ("riscv32imac-esp-espidf", riscv32imac_esp_espidf),
+     ("riscv32imafc-esp-espidf", riscv32imafc_esp_espidf),
+diff --git a/compiler/rustc_target/src/spec/targets/riscv32imce_unknown_none_elf.rs b/compiler/rustc_target/src/spec/targets/riscv32imce_unknown_none_elf.rs
+new file mode 100644
+index 00000000000..7ce0361a148
+--- /dev/null
++++ b/compiler/rustc_target/src/spec/targets/riscv32imce_unknown_none_elf.rs
+@@ -0,0 +1,24 @@
++use crate::spec::{Cc, LinkerFlavor, Lld, PanicStrategy, RelocModel, Target, TargetOptions};
++
++pub fn target() -> Target {
++    Target {
++        data_layout: "e-m:e-p:32:32-i64:64-n32-S128".into(),
++        llvm_target: "riscv32".into(),
++        pointer_width: 32,
++        arch: "riscv32".into(),
++
++        options: TargetOptions {
++            linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
++            linker: Some("rust-lld".into()),
++            cpu: "generic-rv32".into(),
++            max_atomic_width: Some(32),
++            atomic_cas: false,
++            features: "+m,+c,+e,+forced-atomics".into(),
++            panic_strategy: PanicStrategy::Abort,
++            relocation_model: RelocModel::Static,
++            emit_debug_gdb_scripts: false,
++            eh_frame_header: false,
++            ..Default::default()
++        },
++    }
++}

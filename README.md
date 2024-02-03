@@ -8,6 +8,8 @@ You'll also need around 25 GB of disk space to hold the image (until I've time t
 
 ## Building the container image
 
+Consider downloading the latest image from the [Releases](https://github.com/soc-hub-fi/rust-rv32imce-docker/releases)  section, as building the image may take several hours.
+
 If you need checkpointing, i.e., if you want to share your container runtime in the GitHub Releases
 page, the containers must be created as root. Switch to root using `sudo -i`.
 

@@ -42,9 +42,7 @@ RUN git apply 01_riscv32imce_target.patch
 COPY config.toml .
 
 # Build the Rust compiler
-RUN \
-  ./x build library && \
-  ./x install
+RUN ./x build library
 
 # Stage 2: Arch Linux with basic development tools
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074
@@ -55,7 +53,7 @@ COPY --from=build ${RISCV} ${RISCV}
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Copy Rust compiler
-ENV RUST=/opt/rust/
+ENV RUST=/root/rust/
 COPY --from=build ${RUST} ${RUST}
 
 # Install rustup

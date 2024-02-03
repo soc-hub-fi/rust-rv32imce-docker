@@ -1,9 +1,8 @@
-# Arch Linux with basic development tools
-FROM docker.io/library/archlinux:base-devel-20240101.0.204074
-
-RUN pacman --noconfirm -Syy tmux vim git less
+# Stage 1 (build stage): Arch Linux with basic development tools
+FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as build
 
 # Download RISC-V cross-compiler
+RUN pacman --noconfirm -Syy git less
 WORKDIR /root/
 ENV RISCV=/opt/riscv/
 RUN \
@@ -45,13 +44,28 @@ COPY config.toml .
 # Build the Rust compiler
 RUN ./x build library
 
+# Stage 2: Arch Linux with basic development tools
+FROM docker.io/library/archlinux:base-devel-20240101.0.204074
+
+# Copy RISC-V cross-compiler
+ENV RISCV=/opt/riscv/
+COPY --from=build ${RISCV} ${RISCV}
+ENV PATH="${RISCV}/bin:${PATH}"
+
+# Copy Rust compiler
+ENV RUST=/opt/rust/
+COPY --from=build /root/rust/build/ ${RUST}
+
 # Install rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Hook the new compiler into rustup
 RUN \
-  rustup toolchain link rve-stage0 /root/rust/build/host/stage0-sysroot # beta compiler + stage0 std && \
-  rustup toolchain link rve-stage1 /root/rust/build/host/stage1 && \
-  rustup toolchain link rve /root/rust/build/host/stage2 && \
+  rustup toolchain link rve-stage0 ${RUST}/host/stage0-sysroot # beta compiler + stage0 std && \
+  rustup toolchain link rve-stage1 ${RUST}/host/stage1 && \
+  rustup toolchain link rve ${RUST}/host/stage2 && \
   rustup default rve
+
+# Add tools for end-user
+RUN pacman --noconfirm -Syy tmux vim

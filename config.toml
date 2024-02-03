@@ -17,3 +17,7 @@ target = [
     "riscv32imc-unknown-none-elf",
     "riscv32imce-unknown-none-elf",
 ]
+
+[rust]
+# Disabled due to FileCheck executable missing, as advised in Rust config.example.toml
+codegen-tests = false

@@ -25,7 +25,7 @@ docker build -t rust-rv32imce -f Dockerfile
 
 This may take a duration between 30 minutes to several hours depending on host performance.
 
-## Saving the image for distribution
+### Saving the image for distribution
 
 ```sh
 # Create a full replica of the image, distributable over network
@@ -55,7 +55,7 @@ podman stop rust-rv32imce
 podman rm rust-rv32imce
 ```
 
-## Creating a container checkpoint
+### Creating a container checkpoint
 
 Checkpoint the container to save its current state to disk. Stops the container. Depends on the
 image from the localhost so these cannot be transferred over network.

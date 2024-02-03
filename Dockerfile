@@ -45,15 +45,13 @@ COPY config.toml .
 # Build the Rust compiler
 RUN ./x build library
 
-WORKDIR /root/
-
 # Install rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Hook the new compiler into rustup
 RUN \
-  rustup toolchain link rve-stage0 build/host/stage0-sysroot # beta compiler + stage0 std && \
-  rustup toolchain link rve-stage1 build/host/stage1 && \
-  rustup toolchain link rve build/host/stage2 && \
+  rustup toolchain link rve-stage0 /root/rust/build/host/stage0-sysroot # beta compiler + stage0 std && \
+  rustup toolchain link rve-stage1 /root/rust/build/host/stage1 && \
+  rustup toolchain link rve /root/rust/build/host/stage2 && \
   rustup default rve

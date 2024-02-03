@@ -18,6 +18,9 @@ target = [
     "riscv32imce-unknown-none-elf",
 ]
 
+[install]
+prefix = "/opt/rust/"
+
 [rust]
 # Disabled due to FileCheck executable missing, as advised in Rust config.example.toml
 codegen-tests = false

@@ -42,7 +42,9 @@ RUN git apply 01_riscv32imce_target.patch
 COPY config.toml .
 
 # Build the Rust compiler
-RUN ./x build library
+RUN \
+  ./x build library && \
+  ./x install
 
 # Stage 2: Arch Linux with basic development tools
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074
@@ -54,7 +56,7 @@ ENV PATH="${RISCV}/bin:${PATH}"
 
 # Copy Rust compiler
 ENV RUST=/opt/rust/
-COPY --from=build /root/rust/build/ ${RUST}
+COPY --from=build ${RUST} ${RUST}
 
 # Install rustup
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -62,9 +64,9 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Hook the new compiler into rustup
 RUN \
-  rustup toolchain link rve-stage0 ${RUST}/host/stage0-sysroot # beta compiler + stage0 std && \
-  rustup toolchain link rve-stage1 ${RUST}/host/stage1 && \
-  rustup toolchain link rve ${RUST}/host/stage2 && \
+  rustup toolchain link rve-stage0 ${RUST}/build/host/stage0-sysroot # beta compiler + stage0 std && \
+  rustup toolchain link rve-stage1 ${RUST}/build/host/stage1 && \
+  rustup toolchain link rve ${RUST}/build/host/stage2 && \
   rustup default rve
 
 # Add tools for end-user

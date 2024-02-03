@@ -1,4 +1,4 @@
-# Docker container with Rust support for rv32imce-unknown-none-elf
+# Rust for rv32imce-unknown-none-elf (Docker)
 
 ## Requirements
 

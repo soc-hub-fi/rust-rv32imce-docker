@@ -2,13 +2,30 @@
 
 ## Requirements
 
-You'll need Docker or podman available on system. podman is pretty easy to setup on Linux so we'll recommend that one: <https://podman.io/docs/installation#installing-on-linux>.
+You'll need Docker or podman available on system. podman is pretty easy to setup on Linux so we'll
+recommend that one: <https://podman.io/docs/installation#installing-on-linux>.
 
-You'll also need around 25 GB of disk space to hold the image (until I've time to optimize it a bit).
+You'll also need around 25 GB of disk space to hold the image (until I've time to optimize it a
+bit).
+
+## Quickstart
+
+1. Download the latest container image from the
+[Releases](https://github.com/soc-hub-fi/rust-rv32imce-docker/releases) section.
+1. Load the image onto your podman:
+    * `podman load-i rust-rv32imce.tar.gz`
+1. Boot a container from the image:
+    * `podman run --name rust-rv32imce -dt rust-rv32imc`
+1. Attach to the running container and start development
+    * `podman exec -it rust-rv32imce /bin/bash`
+1. You might want to start by cloning <https://github.com/perlindgren/rust_rve> and trying to
+   compile some of the examples.
 
 ## Building the container image
 
-Consider downloading the latest image from the [Releases](https://github.com/soc-hub-fi/rust-rv32imce-docker/releases)  section, as building the image may take several hours.
+Instead of building the container image, consider downloading the latest image from the
+[Releases](https://github.com/soc-hub-fi/rust-rv32imce-docker/releases) section, as building the
+image may take several hours.
 
 If you need checkpointing, i.e., if you want to share your container runtime in the GitHub Releases
 page, the containers must be created as root. Switch to root using `sudo -i`.

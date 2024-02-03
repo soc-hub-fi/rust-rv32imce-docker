@@ -29,7 +29,7 @@ RUN ninja -C build install
 
 # Clone the Rust compiler
 WORKDIR /root/
-RUN pacman --noconfirm -Syy libiconv pkg-config
+RUN pacman --noconfirm -Syy libiconv pkg-config python3
 RUN \
   git clone --single-branch https://github.com/rust-lang/rust && \
   cd rust && \

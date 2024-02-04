@@ -70,6 +70,7 @@ RUN \
 # Add tools for end-user
 RUN pacman --noconfirm -Syy \
     git \
+    ssh \
     tmux \
     vim
 

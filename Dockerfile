@@ -68,4 +68,7 @@ RUN \
   rustup default rve
 
 # Add tools for end-user
-RUN pacman --noconfirm -Syy tmux vim
+RUN pacman --noconfirm -Syy \
+    tmux \
+    vim
+

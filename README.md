@@ -20,6 +20,7 @@ You'll also need around 12 GB of disk space to hold the image.
 1. Some tips for development
     1. You might want to start by [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     1. Here's some example code runnable on the rt-ss that you can clone <https://github.com/perlindgren/rust_rve>
+    1. Once you've built some binaries, copy them over to the host: `podman cp rust-rv32imce:/root/rust_rve/target/riscv32imce-unknown-none-elf .`
 
 ## Building the container image
 
@@ -64,6 +65,9 @@ podman ps --all
 
 # Attach
 podman exec -it rust-rv32imce /bin/bash
+
+# Copy files from container to host
+podman cp rust-rv32imce:/root/file .
 
 # Stop & remove
 podman stop rust-rv32imce

@@ -28,7 +28,7 @@ RUN \
 RUN ninja -C build install
 
 # Clone the Rust compiler
-WORKDIR /root/
+WORKDIR /opt/
 RUN pacman --noconfirm -Syy libiconv pkg-config python3
 RUN \
   git clone --single-branch https://github.com/rust-lang/rust && \
@@ -36,7 +36,7 @@ RUN \
   git checkout bf3c6c5bed498f41ad815641319a1ad9bcecb8e8
 
 # Apply patch & configure Rust for build
-WORKDIR /root/rust/
+WORKDIR /opt/rust/
 COPY 01_riscv32imce_target.patch .
 RUN git apply 01_riscv32imce_target.patch
 COPY config.toml .
@@ -53,7 +53,7 @@ COPY --from=build ${RISCV} ${RISCV}
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Copy Rust compiler
-ENV RUST=/root/rust/
+ENV RUST=/opt/rust/
 COPY --from=build ${RUST} ${RUST}
 
 # Install rustup

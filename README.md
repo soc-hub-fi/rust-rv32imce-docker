@@ -59,8 +59,8 @@ containers must be created as root. Switch to root using `sudo -i`.
 # Boot a container from the image
 podman run --name rust-rv32imce -dt rust-rv32imce
 
-# List running containers
-podman ps
+# List containers
+podman ps --all
 
 # Attach
 podman exec -it rust-rv32imce /bin/bash

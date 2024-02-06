@@ -1,4 +1,4 @@
-# Rust for rv32imce-unknown-none-elf (Docker)
+# Rust for rv32emc-unknown-none-elf (Docker)
 
 ## Requirements
 
@@ -12,15 +12,15 @@ You'll also need around 12 GB of disk space to hold the image.
 1. Switch to root (if you need checkpointing)
     * `sudo -i`
 1. Build the container image
-    * `podman build -t rust-rv32imce -f Dockerfile`
+    * `podman build -t rust-rv32emc -f Dockerfile`
 1. Boot a container from the image:
-    * `podman run --name rust-rv32imce -dt rust-rv32imc`
+    * `podman run --name rust-rv32emc -dt rust-rv32imc`
 1. Attach to the running container and start development
-    * `podman exec -it rust-rv32imce /bin/bash`
+    * `podman exec -it rust-rv32emc /bin/bash`
 1. Some tips for development
     1. You might want to start by [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     1. Here's some example code runnable on the rt-ss that you can clone <https://github.com/perlindgren/rust_rve>
-    1. Once you've built some binaries, copy them over to the host: `podman cp rust-rv32imce:/root/rust_rve/target/riscv32imce-unknown-none-elf .`
+    1. Once you've built some binaries, copy them over to the host: `podman cp rust-rv32emc:/root/rust_rve/target/riscv32emc-unknown-none-elf .`
 
 ## Building the container image
 
@@ -38,16 +38,16 @@ cat /proc/cpuinfo | grep processor | wc -l
 
 ```sh
 # Build the image using only specified cores (pick a number lower than your core count for the higher bound)
-podman build -t rust-rv32imce -f Dockerfile --cpuset-cpus 0-6
+podman build -t rust-rv32emc -f Dockerfile --cpuset-cpus 0-6
 
 # Build the image without resource limits
-podman build -t rust-rv32imce -f Dockerfile
+podman build -t rust-rv32emc -f Dockerfile
 ```
 
 or
 
 ```sh
-docker build -t rust-rv32imce -f Dockerfile
+docker build -t rust-rv32emc -f Dockerfile
 ```
 
 This may take a duration between 30 minutes to several hours depending on host performance.
@@ -56,10 +56,10 @@ This may take a duration between 30 minutes to several hours depending on host p
 
 ```sh
 # Create a full replica of the image, distributable over network
-podman save rust-rv32imce -o rust-rv32imce.tar.gz
+podman save rust-rv32emc -o rust-rv32emc.tar.gz
 
 # Load from the image
-podman load -i rust-rv32imce.tar.gz
+podman load -i rust-rv32emc.tar.gz
 ```
 
 ## Working with the container
@@ -69,20 +69,20 @@ containers must be created as root. Switch to root using `sudo -i`.
 
 ```sh
 # Boot a container from the image
-podman run --name rust-rv32imce -dt rust-rv32imce
+podman run --name rust-rv32emc -dt rust-rv32emc
 
 # List containers
 podman ps --all
 
 # Attach
-podman exec -it rust-rv32imce /bin/bash
+podman exec -it rust-rv32emc /bin/bash
 
 # Copy files from container to host
-podman cp rust-rv32imce:/root/file .
+podman cp rust-rv32emc:/root/file .
 
 # Stop & remove
-podman stop rust-rv32imce
-podman rm rust-rv32imce
+podman stop rust-rv32emc
+podman rm rust-rv32emc
 ```
 
 ### Creating a container checkpoint
@@ -92,9 +92,9 @@ image from the localhost so these cannot be transferred over network.
 
 ```sh
 # Checkpoint the container
-podman container checkpoint rust-rv32imce -e rust-rv32imce.tar.gz
+podman container checkpoint rust-rv32emc -e rust-rv32emc.tar.gz
 
 # Restore
-podman container restore rust-rv32imce
-podman container restore -i rust-rv32imce.tar.gz
+podman container restore rust-rv32emc
+podman container restore -i rust-rv32emc.tar.gz
 ```

@@ -8,14 +8,14 @@ llvm-config = "/opt/llvm/bin/llvm-config"
 [target.riscv32imc-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
 
-[target.riscv32imce-unknown-none-elf]
+[target.riscv32emc-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
 
 [build]
 target = [
     "x86_64-unknown-linux-gnu",
     "riscv32imc-unknown-none-elf",
-    "riscv32imce-unknown-none-elf",
+    "riscv32emc-unknown-none-elf",
 ]
 # Building docs for no_std targets seems to fail here
 docs = false

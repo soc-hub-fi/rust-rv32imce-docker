@@ -37,8 +37,8 @@ RUN \
 
 # Apply patch & configure Rust for build
 WORKDIR /opt/rust/
-COPY 01_riscv32imce_target.patch .
-RUN git apply 01_riscv32imce_target.patch
+COPY 01_riscv32emc_target.patch .
+RUN git apply 01_riscv32emc_target.patch
 COPY config.toml .
 
 # Build the Rust compiler

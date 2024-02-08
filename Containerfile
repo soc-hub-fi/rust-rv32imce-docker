@@ -1,4 +1,4 @@
-# Stage 1 (build stage): Arch Linux with basic development tools
+# Build stage: Arch Linux with basic development tools
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS builder
 
 WORKDIR /root/
@@ -50,7 +50,7 @@ RUN ./x build library
 
 
 
-# Stage 2: Arch Linux with basic development tools
+# A lean image with only what's necessary
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as release
 
 # Copy RISC-V cross-compiler
@@ -75,9 +75,10 @@ RUN \
 
 
 
+# A more refined image for further development
 FROM release as release:devel
 
-# Add tools for end-user
+# Add optional tools for end-user
 RUN pacman --noconfirm -Syy \
     binutils \
     git \

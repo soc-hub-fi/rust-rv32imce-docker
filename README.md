@@ -27,9 +27,20 @@ You'll also need around 12 GB of disk space to hold the image.
 If you need checkpointing, i.e., if you want to share your container runtime in the GitHub Releases
 page, the containers must be created as root. Switch to root using `sudo -i`.
 
-Build the image:
+The container build requires some several hours from your computer, depending on system specs. If you need the computer
+while it builds the container, do limit the number of cores used by the container build. You will need to know the
+number of cores on your system:
 
 ```sh
+# Identify the number of CPU cores on your system
+cat /proc/cpuinfo | grep processor | wc -l
+```
+
+```sh
+# Build the image using only specified cores (pick a number lower than your core count for the higher bound)
+podman build -t rust-rv32imce -f Dockerfile --cpuset-cpus 0-6
+
+# Build the image without resource limits
 podman build -t rust-rv32imce -f Dockerfile
 ```
 

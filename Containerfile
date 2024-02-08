@@ -90,4 +90,5 @@ RUN pacman --noconfirm -Syy \
     openssh \
     riscv64-linux-gnu-binutils \
     tmux \
-    vim
+    vim \
+    zsh

@@ -47,6 +47,9 @@ podman build -t rust-rv32emc -f Containerfile --cpuset-cpus 0-6
 
 # Build the image without resource limits
 podman build -t rust-rv32emc -f Containerfile
+
+# Build a smaller image without any optional extras (e.g., vim, tmux, binutils, openssh)
+podman build -t rust-rv32emc -f Containerfile --target minimal
 ```
 
 This may take a duration between 30 minutes to several hours depending on host performance.

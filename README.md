@@ -5,7 +5,8 @@ A Docker container for a Rust compiler targeting rv32{e,i}mc-unknown-none-elf.
 ## Requirements
 
 You'll need Docker or podman available on system. podman is pretty easy to setup on Linux so we'll
-recommend that one: <https://podman.io/docs/installation#installing-on-linux>.
+recommend that one: <https://podman.io/docs/installation#installing-on-linux>. You can use `docker`
+as a drop-in replacement for `podman`, all commands are interchangeable.
 
 You'll also need around 12 GB of disk space to hold the final image (or ~100 GiB to build it).
 
@@ -46,12 +47,6 @@ podman build -t rust-rv32emc -f Containerfile --cpuset-cpus 0-6
 
 # Build the image without resource limits
 podman build -t rust-rv32emc -f Containerfile
-```
-
-or
-
-```sh
-docker build -t rust-rv32emc -f Containerfile
 ```
 
 This may take a duration between 30 minutes to several hours depending on host performance.

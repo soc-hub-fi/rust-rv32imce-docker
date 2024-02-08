@@ -1,15 +1,19 @@
 # Stage 1 (build stage): Arch Linux with basic development tools
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS builder
 
-# Download RISC-V cross-compiler
-RUN pacman --noconfirm -Syy git less
 WORKDIR /root/
+
+# Clone RISC-V GCC
+RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
+WORKDIR /root/riscv-gnu-toolchain/
+
+# Build RISC-V cross-compiler
+RUN pacman --noconfirm -Syy autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
 ENV RISCV=/opt/riscv/
 RUN \
   mkdir ${RISCV} && \
-  curl -LO https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/2024.02.02/riscv32-elf-ubuntu-22.04-gcc-nightly-2024.02.02-nightly.tar.gz && \
-  tar -xzf riscv32-elf-ubuntu-22.04-gcc-nightly-2024.02.02-nightly.tar.gz -C ${RISCV} --strip-components=1 && \
-  rm riscv32-elf-ubuntu-22.04-gcc-nightly-2024.02.02-nightly.tar.gz
+  ./configure --prefix=${RISCV}
+RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Clone LLVM

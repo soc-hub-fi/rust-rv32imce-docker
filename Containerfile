@@ -75,4 +75,3 @@ RUN pacman --noconfirm -Syy \
     riscv64-linux-gnu-binutils \
     tmux \
     vim
-

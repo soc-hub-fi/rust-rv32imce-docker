@@ -12,7 +12,7 @@ You'll also need around 12 GB of disk space to hold the image.
 1. Switch to root (if you need checkpointing)
     * `sudo -i`
 1. Build the container image
-    * `podman build -t rust-rv32emc -f Dockerfile`
+    * `podman build -t rust-rv32emc -f Containerfile`
 1. Boot a container from the image:
     * `podman run --name rust-rv32emc -dt rust-rv32imc`
 1. Attach to the running container and start development
@@ -39,16 +39,16 @@ cat /proc/cpuinfo | grep processor | wc -l
 
 ```sh
 # Build the image using only specified cores (pick a number lower than your core count for the higher bound)
-podman build -t rust-rv32emc -f Dockerfile --cpuset-cpus 0-6
+podman build -t rust-rv32emc -f Containerfile --cpuset-cpus 0-6
 
 # Build the image without resource limits
-podman build -t rust-rv32emc -f Dockerfile
+podman build -t rust-rv32emc -f Containerfile
 ```
 
 or
 
 ```sh
-docker build -t rust-rv32emc -f Dockerfile
+docker build -t rust-rv32emc -f Containerfile
 ```
 
 This may take a duration between 30 minutes to several hours depending on host performance.

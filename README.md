@@ -17,7 +17,7 @@ You'll also need around 12 GB of disk space to hold the final image (or ~100 GiB
 1. Build the container image
     * `podman build -t rust-rv32emc -f Containerfile`
 1. Boot a container from the image:
-    * `podman run --name rust-rv32emc -dt rust-rv32imc`
+    * `podman run --name rust-rv32emc -dt rust-rv32emc`
 1. Attach to the running container and start development
     * `podman exec -it rust-rv32emc /bin/bash`
 1. Some tips for development

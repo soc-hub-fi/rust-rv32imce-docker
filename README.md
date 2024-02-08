@@ -19,7 +19,8 @@ You'll also need around 12 GB of disk space to hold the image.
     * `podman exec -it rust-rv32emc /bin/bash`
 1. Some tips for development
     1. You might want to start by [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
-    1. Here's some example code runnable on the rt-ss that you can clone <https://github.com/perlindgren/rust_rve>
+    1. Here's some example code runnable on the rt-ss that you can clone
+       <https://github.com/perlindgren/rust_rve>
     1. Once you've built some binaries, copy them over to the host:
         * `podman cp rust-rv32emc:/root/rust_rve/target/riscv32emc-unknown-none-elf .`
 
@@ -28,9 +29,9 @@ You'll also need around 12 GB of disk space to hold the image.
 If you need checkpointing, i.e., if you want to share your container runtime in the GitHub Releases
 page, the containers must be created as root. Switch to root using `sudo -i`.
 
-The container build requires some several hours from your computer, depending on system specs. If you need the computer
-while it builds the container, do limit the number of cores used by the container build. You will need to know the
-number of cores on your system:
+The container build requires some several hours from your computer, depending on system specs. If
+you need the computer while it builds the container, do limit the number of cores used by the
+container build. You will need to know the number of cores on your system:
 
 ```sh
 # Identify the number of CPU cores on your system

@@ -100,3 +100,13 @@ podman container checkpoint rust-rv32emc -e rust-rv32emc.tar.gz
 podman container restore rust-rv32emc
 podman container restore -i rust-rv32emc.tar.gz
 ```
+
+## Debugging the container
+
+There's a special image for debugging the release image. It is larger because it retains all the
+artifacts, but it is similar otherwise.
+
+```sh
+# Build the debug container
+podman build -t rust-rv32emc-debug -f Containerfile -f debug.Containerfile
+```

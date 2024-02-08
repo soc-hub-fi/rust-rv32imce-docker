@@ -45,7 +45,7 @@ COPY config.toml .
 RUN ./x build library
 
 # Stage 2: Arch Linux with basic development tools
-FROM docker.io/library/archlinux:base-devel-20240101.0.204074
+FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as release
 
 # Copy RISC-V cross-compiler
 ENV RISCV=/opt/riscv/
@@ -66,6 +66,8 @@ RUN \
   rustup toolchain link rve-stage1 ${RUST}/build/host/stage1 && \
   rustup toolchain link rve ${RUST}/build/host/stage2 && \
   rustup default rve
+
+FROM release as release:devel
 
 # Add tools for end-user
 RUN pacman --noconfirm -Syy \

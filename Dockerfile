@@ -69,8 +69,10 @@ RUN \
 
 # Add tools for end-user
 RUN pacman --noconfirm -Syy \
+    binutils \
     git \
     openssh \
+    riscv64-linux-gnu-binutils \
     tmux \
     vim
 

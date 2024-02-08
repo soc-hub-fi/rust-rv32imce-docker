@@ -56,7 +56,7 @@ RUN ./x build library
 
 
 # A lean image with only what's necessary
-FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as release
+FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as minimal
 
 # Copy RISC-V cross-compiler
 ENV RISCV=/opt/riscv/
@@ -81,7 +81,7 @@ RUN \
 
 
 # A more refined image for further development
-FROM release as release:devel
+FROM minimal as devel
 
 # Add optional tools for end-user
 RUN pacman --noconfirm -Syy \

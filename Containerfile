@@ -23,6 +23,7 @@ ENV PATH="${RISCV}/bin:${PATH}"
 RUN pacman --noconfirm -Syy cmake ninja gcc python3
 
 # Clone LLVM
+WORKDIR /root/
 RUN git clone --depth=1 --branch llvmorg-18.1.0-rc2 https://github.com/llvm/llvm-project
 
 # Build LLVM

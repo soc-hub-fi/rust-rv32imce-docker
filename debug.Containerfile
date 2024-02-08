@@ -10,6 +10,7 @@ RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
 # Hook the new compiler into rustup
+ENV RUST=/opt/rust/
 RUN \
   rustup toolchain link rve-stage0 ${RUST}/build/host/stage0-sysroot && \
   rustup toolchain link rve-stage1 ${RUST}/build/host/stage1 && \

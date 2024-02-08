@@ -4,12 +4,14 @@ FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS builder
 WORKDIR /root/
 RUN pacman --noconfirm -Syy git less
 
+# Requirements for RISC-V GCC
+RUN pacman --noconfirm -Syy autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
+
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
 WORKDIR /root/riscv-gnu-toolchain/
 
 # Build RISC-V cross-compiler
-RUN pacman --noconfirm -Syy autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
 ENV RISCV=/opt/riscv/
 RUN \
   mkdir ${RISCV} && \
@@ -17,12 +19,14 @@ RUN \
 RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 
+# Requirements for LLVM
+RUN pacman --noconfirm -Syy cmake ninja gcc python3
+
 # Clone LLVM
 RUN git clone --depth=1 --branch llvmorg-18.1.0-rc2 https://github.com/llvm/llvm-project
+WORKDIR /root/llvm-project/
 
 # Build LLVM
-RUN pacman --noconfirm -Syy cmake ninja gcc python3
-WORKDIR /root/llvm-project/
 ENV LLVM=/opt/llvm/
 RUN \
   mkdir ${LLVM} && \

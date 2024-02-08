@@ -9,9 +9,9 @@ RUN pacman --noconfirm -Syy autoconf automake curl python3 libmpc mpfr gmp gawk 
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
-WORKDIR /root/riscv-gnu-toolchain/
 
 # Build RISC-V cross-compiler
+WORKDIR /root/riscv-gnu-toolchain/
 ENV RISCV=/opt/riscv/
 RUN \
   mkdir ${RISCV} && \
@@ -24,9 +24,9 @@ RUN pacman --noconfirm -Syy cmake ninja gcc python3
 
 # Clone LLVM
 RUN git clone --depth=1 --branch llvmorg-18.1.0-rc2 https://github.com/llvm/llvm-project
-WORKDIR /root/llvm-project/
 
 # Build LLVM
+WORKDIR /root/llvm-project/
 ENV LLVM=/opt/llvm/
 RUN \
   mkdir ${LLVM} && \
@@ -35,6 +35,9 @@ RUN \
   -DLLVM_ENABLE_PROJECTS="clang;lld" -DCMAKE_BUILD_TYPE=Release
 # This will take some 10 min to few hours depending on the resources available on host
 RUN ninja -C build install
+
+# Requirements for Rust
+RUN pacman --noconfirm -Syy libiconv pkg-config python3
 
 # Clone the Rust compiler
 WORKDIR /opt/

@@ -2,6 +2,7 @@
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS builder
 
 WORKDIR /root/
+RUN pacman --noconfirm -Syy git less
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain

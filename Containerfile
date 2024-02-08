@@ -15,7 +15,7 @@ WORKDIR /root/riscv-gnu-toolchain/
 ENV RISCV=/opt/riscv/
 RUN \
   mkdir ${RISCV} && \
-  ./configure --prefix=${RISCV}
+  ./configure --prefix=${RISCV} --with-arch=rv32emc --with-abi=ilp32e
 RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 

@@ -113,3 +113,18 @@ artifacts, but it is similar otherwise.
 # Build the debug container
 podman build -t rust-rv32emc-debug -f Containerfile -f debug.Containerfile
 ```
+
+## Using VS Code with the container
+
+This may require some minor setup. Configure your system based on this guide:
+<https://jahed.dev/2023/05/27/remote-development-with-vs-code-podman/>
+
+TL;DR:
+
+1. Add to your VS Code settings: `"dev.containers.dockerPath": "podman"`
+2. Make sure the container is running, i.e., `podman run --name rust-rv32emc -dt rust-rv32emc` or `podman start rust-rv32emc`
+3. Then `Command Palette` -> `Dev Containers: Attach to Running Container...`. For first time load,
+   VS Code will take some time to set up the remote container.
+
+If it doesn't work for you and something else is also required, open an issue and I'll figure it
+out.

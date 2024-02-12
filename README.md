@@ -82,8 +82,11 @@ podman exec -it rust-rv32emc /bin/bash
 # Copy files from container to host
 podman cp rust-rv32emc:/root/file .
 
-# Stop & remove
+# Stop & start (analogous to shutdown & reboot)
 podman stop rust-rv32emc
+podman start rust-rv32emc
+
+# Remove the container permanently
 podman rm rust-rv32emc
 ```
 

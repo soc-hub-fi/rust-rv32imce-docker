@@ -128,3 +128,10 @@ TL;DR:
 
 If it doesn't work for you and something else is also required, open an issue and I'll figure it
 out.
+
+## Using your SSH keys with the container
+
+With pre-existing SSH keys on the host machine:
+
+* On host: `podman cp ~/.ssh rust-rv32emc:/root/`
+* On container: `chmod 600 .ssh/id_ed25519 .ssh/id_ed25519.pub .ssh/config`

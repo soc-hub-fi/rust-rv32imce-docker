@@ -21,7 +21,6 @@ You'll also need around 12 GB of disk space to hold the final image (or ~100 GiB
 1. Attach to the running container and start development
     * `podman exec -w=/root/ -it rust-rv32emc /bin/bash`
 1. Some tips for development
-    1. You might want to start by [generating a new SSH key](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent)
     1. Here's some example code runnable on the rt-ss that you can clone
        <https://github.com/perlindgren/rust_rve>
     1. Once you've built some binaries, copy them over to the host:

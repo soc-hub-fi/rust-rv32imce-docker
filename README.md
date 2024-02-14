@@ -134,3 +134,16 @@ With pre-existing SSH keys on the host machine:
 
 * On host: `podman cp ~/.ssh rust-rv32emc:/root/`
 * On container: `chmod 600 .ssh/id_ed25519 .ssh/id_ed25519.pub .ssh/config`
+
+## Pushing an image to Docker Hub
+
+```sh
+# Build the image to be uploaded
+podman build -f Containerfile --target minimal -t $USER/rust-rv32e:$TAG .
+
+# Login to docker.io
+podman login --username=$USER docker.io
+
+# Push the image to Docker Hub
+podman push $USER/rust-rv32e:$TAG
+```

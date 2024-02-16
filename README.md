@@ -120,12 +120,35 @@ This may require some minor setup. Configure your system based on this guide:
 
 TL;DR:
 
-1. Add to your VS Code settings: `"dev.containers.dockerPath": "podman"`
-2. Make sure the container is running, i.e., `podman run --name rust-rv32emc -dt rust-rv32emc` or `podman start rust-rv32emc`
-3. Then `Command Palette` -> `Dev Containers: Attach to Running Container...`. For first time load,
+1. (WSL only) systemd must be turned on
+
+    ```sh
+    $ cat /etc/wsl.conf
+    [boot]
+    systemd=true
+    ```
+
+2. Make sure dbus.socket is running:
+
+    ```sh
+    $ systemctl status dbus.socket
+    Active: active (running) since Fri 2024-02-16 12:42:52 EET; 14min ago
+    ```
+
+    If it's not, install & enable it
+
+    ```sh
+    sudo apt-get install dbus-user-session
+    systemctl --user enable --now dbus.socket
+    ```
+
+3. (podman only) Add to your VS Code settings: `"dev.containers.dockerPath": "podman"`
+4. Make sure the container is running, i.e., `podman run --name rust-rv32emc -dt rust-rv32emc` or
+   `podman start rust-rv32emc`
+5. Then `Command Palette` -> `Dev Containers: Attach to Running Container...`. For first time load,
    VS Code will take some time to set up the remote container.
 
-If it doesn't work for you and something else is also required, open an issue and I'll figure it
+If it doesn't work for you and something else is also required, open an issue and I might figure it
 out.
 
 ## Using your SSH keys with the container

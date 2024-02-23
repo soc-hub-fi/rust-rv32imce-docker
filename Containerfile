@@ -39,6 +39,9 @@ RUN \
 # This will take some 10 min to few hours depending on the resources available on host
 RUN ninja -C build install
 
+
+FROM builder AS minimal-builder
+
 # Requirements for Rust
 RUN apt install -y pkg-config python3
 
@@ -59,6 +62,29 @@ COPY config.minimal.toml config.toml
 RUN ./x build library
 
 
+FROM builder AS devel-builder
+
+# Requirements for Rust
+RUN pacman --noconfirm -Syy libiconv pkg-config python3
+
+# Clone the Rust compiler
+WORKDIR /opt/
+RUN pacman --noconfirm -Syy libiconv pkg-config python3
+RUN \
+  git clone --single-branch https://github.com/rust-lang/rust && \
+  cd rust && \
+  git checkout bf3c6c5bed498f41ad815641319a1ad9bcecb8e8
+
+# Apply patch & configure Rust for build
+WORKDIR /opt/rust/
+COPY 01_riscv32emc_target.patch .
+RUN git apply 01_riscv32emc_target.patch
+COPY config.devel.toml ./config.toml
+
+# Build the Rust compiler
+RUN ./x build library
+
+
 # A lean image with only what's necessary
 FROM debian:trixie-slim AS minimal
 
@@ -69,7 +95,7 @@ ENV PATH="${RISCV}/bin:${PATH}"
 
 # Copy Rust compiler
 ENV RUST=/opt/rust/
-COPY --from=builder ${RUST} ${RUST}
+COPY --from=minimal-builder ${RUST} ${RUST}
 
 # Install rustup
 RUN apt-get update
@@ -87,7 +113,27 @@ RUN \
 
 
 # A more refined image for further development
-FROM minimal as devel
+FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS devel
+
+# Copy RISC-V cross-compiler
+ENV RISCV=/opt/riscv/
+COPY --from=builder ${RISCV} ${RISCV}
+ENV PATH="${RISCV}/bin:${PATH}"
+
+# Copy Rust compiler
+ENV RUST=/opt/rust/
+COPY --from=devel-builder ${RUST} ${RUST}
+
+# Install rustup
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+ENV PATH="/root/.cargo/bin:${PATH}"
+
+# Hook the new compiler into rustup
+RUN \
+  rustup toolchain link rve-stage0 ${RUST}/build/host/stage0-sysroot && \
+  rustup toolchain link rve-stage1 ${RUST}/build/host/stage1 && \
+  rustup toolchain link rve ${RUST}/build/host/stage2 && \
+  rustup default rve
 
 # Add optional tools for end-user
 RUN apt-get update

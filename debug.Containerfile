@@ -1,7 +1,7 @@
-# A debug image for testing & development
+# A debug version of the minimal image for testing & development
 #
 # This image is much larger than the release image, and is not intended for end-use
-FROM builder AS debug
+FROM minimal-builder AS debug
 
 # Add tools for end-user
 RUN apt install -y \

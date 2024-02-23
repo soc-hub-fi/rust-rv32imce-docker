@@ -19,6 +19,9 @@ target = [
 ]
 # Building docs for no_std targets seems to fail here
 docs = false
+
+# Build also tools
+extended = true
 tools = [
     "cargo",
     "clippy",

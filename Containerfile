@@ -60,7 +60,7 @@ RUN ./x build library
 
 
 # A lean image with only what's necessary
-FROM debian:trixie-slim as minimal
+FROM debian:trixie-slim AS minimal
 
 RUN apt-get update
 RUN apt install -y \

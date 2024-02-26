@@ -20,9 +20,6 @@ target = [
 # Building docs for no_std targets seems to fail here
 docs = false
 
-[install]
-prefix = "/opt/rust/"
-
 [rust]
 # Disabled due to FileCheck executable missing, as advised in Rust config.example.toml
 codegen-tests = false

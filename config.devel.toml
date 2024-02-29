@@ -1,0 +1,34 @@
+# Includes one of the default files in src/bootstrap/defaults
+profile = "dist"
+change-id = 102579
+
+[target.x86_64-unknown-linux-gnu]
+llvm-config = "/opt/llvm/bin/llvm-config"
+
+[target.riscv32imc-unknown-none-elf]
+llvm-config = "/opt/llvm/bin/llvm-config"
+
+[target.riscv32emc-unknown-none-elf]
+llvm-config = "/opt/llvm/bin/llvm-config"
+
+[build]
+target = [
+    "x86_64-unknown-linux-gnu",
+    "riscv32imc-unknown-none-elf",
+    "riscv32emc-unknown-none-elf",
+]
+# Building docs for no_std targets seems to fail here
+docs = false
+tools = [
+    "cargo",
+    "clippy",
+    "rustdoc",
+    "rustfmt",
+    "rust-analyzer",
+    "rust-analyzer-proc-macro-srv",
+    "src",
+]
+
+[rust]
+# Disabled due to FileCheck executable missing, as advised in Rust config.example.toml
+codegen-tests = false

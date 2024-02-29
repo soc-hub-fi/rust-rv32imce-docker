@@ -53,7 +53,7 @@ RUN \
 WORKDIR /opt/rust/
 COPY 01_riscv32emc_target.patch .
 RUN git apply 01_riscv32emc_target.patch
-COPY config.toml .
+COPY config.minimal.toml config.toml
 
 # Build the Rust compiler
 RUN ./x build library

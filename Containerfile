@@ -76,9 +76,8 @@ RUN \
 
 # Apply patches & configure Rust for build
 WORKDIR /opt/rust/
-COPY config.toml .
+COPY config.minimal.toml config.toml
 COPY patches .
-
 RUN git config --global user.name "$(git --no-pager log --format=format:'%an' -n 1)" && \
   git config --global user.email "$(git --no-pager log --format=format:'%ae' -n 1)" && \
   git am --committer-date-is-author-date *.patch

@@ -10,7 +10,7 @@ RUN apt install -y git less
 RUN apt install -y autoconf automake bc bison bzip2 curl libexpat-dev flex gawk g++ gperf libgmp-dev libmpfr-dev libtool make patchutils python3 texinfo wget zlib1g-dev
 
 # Clone RISC-V GCC
-RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
+RUN git clone --depth=1 --branch 2024.03.01 https://github.com/riscv-collab/riscv-gnu-toolchain
 
 # Build RISC-V cross-compiler
 WORKDIR /root/riscv-gnu-toolchain/

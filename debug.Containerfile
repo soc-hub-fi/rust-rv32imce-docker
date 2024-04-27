@@ -21,7 +21,7 @@ RUN \
   rustup default rve
 
 # Add tools for end-user
-RUN pacman --noconfirm -Syy \
+RUN apt install -y \
     binutils \
     git \
     openssh \

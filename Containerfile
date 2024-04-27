@@ -1,11 +1,13 @@
-# Build stage: Arch Linux with basic development tools
-FROM docker.io/library/archlinux:base-devel-20240101.0.204074 AS builder
+# Build stage: basic development tools
+FROM debian:trixie-slim AS builder
+
 
 WORKDIR /root/
-RUN pacman --noconfirm -Syy git less
+RUN apt-get update
+RUN apt install -y git less
 
 # Requirements for RISC-V GCC
-RUN pacman --noconfirm -Syy autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
+RUN apt install -y autoconf automake build-essential curl python3 gawk bison flex texinfo gperf libtool patchutils bc expat wget
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
@@ -20,7 +22,7 @@ RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Requirements for LLVM
-RUN pacman --noconfirm -Syy cmake ninja gcc python3
+RUN apt install -y cmake ninja-build gcc python3
 
 # Clone LLVM
 WORKDIR /root/
@@ -38,7 +40,7 @@ RUN \
 RUN ninja -C build install
 
 # Requirements for Rust
-RUN pacman --noconfirm -Syy libiconv pkg-config python3
+RUN apt install -y libiconv pkg-config python3
 
 # Clone the Rust compiler
 WORKDIR /opt/
@@ -58,7 +60,7 @@ RUN ./x build library
 
 
 # A lean image with only what's necessary
-FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as minimal
+FROM debian:trixie-slim as minimal
 
 # Copy RISC-V cross-compiler
 ENV RISCV=/opt/riscv/
@@ -85,7 +87,8 @@ RUN \
 FROM minimal as devel
 
 # Add optional tools for end-user
-RUN pacman --noconfirm -Syy \
+RUN apt-get update
+RUN apt install -y \
     binutils \
     git \
     openssh \

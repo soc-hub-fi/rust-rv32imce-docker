@@ -42,7 +42,6 @@ RUN pacman --noconfirm -Syy libiconv pkg-config python3
 
 # Clone the Rust compiler
 WORKDIR /opt/
-RUN pacman --noconfirm -Syy libiconv pkg-config python3
 RUN \
   git clone --single-branch https://github.com/rust-lang/rust && \
   cd rust && \

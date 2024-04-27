@@ -57,7 +57,6 @@ COPY config.toml .
 RUN ./x build library
 
 
-
 # A lean image with only what's necessary
 FROM docker.io/library/archlinux:base-devel-20240101.0.204074 as minimal
 
@@ -80,7 +79,6 @@ RUN \
   rustup toolchain link rve-stage1 ${RUST}/build/host/stage1 && \
   rustup toolchain link rve ${RUST}/build/host/stage2 && \
   rustup default rve
-
 
 
 # A more refined image for further development

@@ -7,7 +7,7 @@ RUN apt-get update
 RUN apt install -y git less
 
 # Requirements for RISC-V GCC
-RUN apt install -y autoconf automake build-essential curl python3 gawk bison flex texinfo gperf libtool patchutils bc expat wget
+RUN apt install -y autoconf automake bc bison bzip2 curl libexpat-dev flex gawk g++ gperf libgmp-dev libmpfr-dev libtool make patchutils python3 texinfo wget zlib1g-dev
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.02.02 https://github.com/riscv-collab/riscv-gnu-toolchain
@@ -22,7 +22,7 @@ RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Requirements for LLVM
-RUN apt install -y cmake ninja-build gcc python3
+RUN apt install -y cmake gcc ninja-build python3
 
 # Clone LLVM
 WORKDIR /root/
@@ -40,7 +40,7 @@ RUN \
 RUN ninja -C build install
 
 # Requirements for Rust
-RUN apt install -y libiconv pkg-config python3
+RUN apt install -y pkg-config python3
 
 # Clone the Rust compiler
 WORKDIR /opt/
@@ -72,6 +72,9 @@ ENV RUST=/opt/rust/
 COPY --from=builder ${RUST} ${RUST}
 
 # Install rustup
+RUN apt-get update
+RUN apt install -y \
+    curl
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
 
@@ -91,8 +94,6 @@ RUN apt-get update
 RUN apt install -y \
     binutils \
     git \
-    openssh \
-    riscv64-linux-gnu-binutils \
     tmux \
     vim \
     zsh

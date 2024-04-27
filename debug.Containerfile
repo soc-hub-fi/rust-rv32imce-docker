@@ -24,8 +24,6 @@ RUN \
 RUN apt install -y \
     binutils \
     git \
-    openssh \
-    riscv64-linux-gnu-binutils \
     tmux \
     vim \
     zsh

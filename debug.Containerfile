@@ -20,12 +20,14 @@ RUN \
   rustup toolchain link rve ${RUST}/build/host/stage2 && \
   rustup default rve
 
+COPY scripts/test_riscv32emc_compile.sh .
+RUN chmod u+x test_riscv32emc_compile.sh && \
+  ./test_riscv32emc_compile.sh
+
 # Add tools for end-user
-RUN pacman --noconfirm -Syy \
+RUN apt install -y \
     binutils \
     git \
-    openssh \
-    riscv64-linux-gnu-binutils \
     tmux \
     vim \
     zsh

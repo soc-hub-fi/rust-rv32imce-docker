@@ -26,7 +26,7 @@ RUN apt install -y cmake gcc ninja-build python3
 
 # Clone LLVM
 WORKDIR /root/
-RUN git clone --depth=1 --branch llvmorg-18.1.0-rc2 https://github.com/llvm/llvm-project
+RUN git clone --depth=1 --branch llvmorg-18.1.4 https://github.com/llvm/llvm-project
 
 # Build LLVM
 WORKDIR /root/llvm-project/

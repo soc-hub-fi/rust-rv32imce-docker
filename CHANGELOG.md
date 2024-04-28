@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- llvm=18.1.4
+- riscv=2024.04.12
+
 ## [v0.2.0] - 2024-04-28
 
 ### Added

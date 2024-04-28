@@ -62,6 +62,10 @@ RUN ./x build library
 # A lean image with only what's necessary
 FROM debian:trixie-slim as minimal
 
+RUN apt-get update
+RUN apt install -y \
+    build-essential
+
 # Copy RISC-V cross-compiler
 ENV RISCV=/opt/riscv/
 COPY --from=builder ${RISCV} ${RISCV}

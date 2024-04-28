@@ -4,10 +4,31 @@ FROM debian:trixie-slim AS builder
 
 WORKDIR /root/
 RUN apt-get update
-RUN apt install -y git less
+RUN apt install -y \
+  git \
+  less
 
 # Requirements for RISC-V GCC
-RUN apt install -y autoconf automake bc bison bzip2 curl libexpat-dev flex gawk g++ gperf libgmp-dev libmpfr-dev libtool make patchutils python3 texinfo zlib1g-dev
+RUN apt install -y \
+  autoconf \
+  automake \
+  bc \
+  bison \
+  bzip2 \
+  curl \
+  libexpat-dev \
+  flex \
+  gawk \
+  g++ \
+  gperf \
+  libgmp-dev \
+  libmpfr-dev \
+  libtool \
+  make \
+  patchutils \
+  python3 \
+  texinfo \
+  zlib1g-dev
 
 # Clone RISC-V GCC
 RUN git clone --depth=1 --branch 2024.04.12 https://github.com/riscv-collab/riscv-gnu-toolchain
@@ -22,7 +43,11 @@ RUN make
 ENV PATH="${RISCV}/bin:${PATH}"
 
 # Requirements for LLVM
-RUN apt install -y cmake gcc ninja-build python3
+RUN apt install -y \
+  cmake \
+  gcc \
+  ninja-build \
+  python3
 
 # Clone LLVM
 WORKDIR /root/
@@ -40,7 +65,9 @@ RUN \
 RUN ninja -C build install
 
 # Requirements for Rust
-RUN apt install -y pkg-config python3
+RUN apt install -y \
+  pkg-config \
+  python3
 
 # Clone the Rust compiler
 WORKDIR /opt/
@@ -76,7 +103,6 @@ ENV RUST=/opt/rust/
 COPY --from=builder ${RUST} ${RUST}
 
 # Install rustup
-RUN apt-get update
 RUN apt install -y \
     curl
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
@@ -96,8 +122,8 @@ FROM minimal as devel
 # Add optional tools for end-user
 RUN apt-get update
 RUN apt install -y \
-    binutils \
-    git \
-    tmux \
-    vim \
-    zsh
+  binutils \
+  git \
+  tmux \
+  vim \
+  zsh

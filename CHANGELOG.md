@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.2.1] - 2024-04-29
+
 ### Changed
 
 - llvm=18.1.4
@@ -22,4 +24,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Use Debian container instead of Arch (debian:trixie-slim)
 
+[v0.2.1]: https://github.com/soc-hub-fi/rust-rv32emc-docker/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/soc-hub-fi/rust-rv32emc-docker/compare/v0.1.0...v0.2.0

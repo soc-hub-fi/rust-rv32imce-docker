@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.2.2] - 2024-04-29
+
+### Added
+
+- Backends for riscv32e, riscv32em, riscv32ec
+
+### Changed
+
+- rust=1.77.2
+
 ## [v0.2.1] - 2024-04-29
 
 ### Changed
@@ -24,5 +34,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Use Debian container instead of Arch (debian:trixie-slim)
 
+[v0.2.2]: https://github.com/soc-hub-fi/rust-rv32emc-docker/compare/v0.2.1...v0.2.2
 [v0.2.1]: https://github.com/soc-hub-fi/rust-rv32emc-docker/compare/v0.2.0...v0.2.1
 [v0.2.0]: https://github.com/soc-hub-fi/rust-rv32emc-docker/compare/v0.1.0...v0.2.0

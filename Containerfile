@@ -72,9 +72,8 @@ RUN apt install -y \
 # Clone the Rust compiler
 WORKDIR /opt/
 RUN \
-  git clone --single-branch https://github.com/rust-lang/rust && \
-  cd rust && \
-  git checkout bf3c6c5bed498f41ad815641319a1ad9bcecb8e8
+  git clone --branch 1.77.2 --depth 1 https://github.com/rust-lang/rust && \
+  cd rust
 
 # Apply patch & configure Rust for build
 WORKDIR /opt/rust/

@@ -1,6 +1,6 @@
 # Rust for rv32emc-unknown-none-elf (Docker)
 
-A Docker container for a Rust compiler targeting rv32{e,i}mc-unknown-none-elf.
+A Docker container for a Rust compiler targeting rv32emc-unknown-none-elf.
 
 ## Requirements
 

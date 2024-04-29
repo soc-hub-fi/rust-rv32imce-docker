@@ -3,6 +3,14 @@
 # This image is much larger than the release image, and is not intended for end-use
 FROM builder AS debug
 
+# Add tools for end-user
+RUN apt install -y \
+    binutils \
+    git \
+    tmux \
+    vim \
+    zsh
+
 WORKDIR /root/
 
 # Add RISC-V to path
@@ -23,11 +31,3 @@ RUN \
 COPY scripts/test_riscv32emc_compile.sh .
 RUN chmod u+x test_riscv32emc_compile.sh && \
   ./test_riscv32emc_compile.sh
-
-# Add tools for end-user
-RUN apt install -y \
-    binutils \
-    git \
-    tmux \
-    vim \
-    zsh

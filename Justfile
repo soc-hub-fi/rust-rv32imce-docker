@@ -1,8 +1,19 @@
+ver := "0.2"
+
 build-debug:
-    podman build -t rust-rv32e:0.2-debug -f Containerfile -f debug.Containerfile --target debug
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tag=rust-rv32e:{{ver}}-debug
+    podman build -t ${tag} -f Containerfile -f debug.Containerfile --target debug
 
 build-minimal:
-    podman build -t rust-rv32e:0.2-minimal -f Containerfile --target minimal
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tag=rust-rv32e:{{ver}}-minimal
+    podman build -t ${tag} -f Containerfile --target minimal
 
 build-devel:
-    podman build -t rust-rv32e:0.2-devel -f Containerfile --target devel
+    #!/usr/bin/env bash
+    set -euo pipefail
+    tag=rust-rv32e:{{ver}}-devel
+    podman build -t ${tag} -f Containerfile --target devel

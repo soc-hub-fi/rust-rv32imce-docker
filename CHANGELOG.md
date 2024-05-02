@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- Include rust-analyzer & proc-macro server
+
 ## [v0.2.2] - 2024-04-29
 
 ### Added

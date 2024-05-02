@@ -87,7 +87,8 @@ RUN git config --global user.name "$(git --no-pager log --format=format:'%an' -n
 RUN ./x build \
   library \
   src/tools/rust-analyzer \
-  src/tools/rust-analyzer/crates/proc-macro-srv-cli
+  src/tools/rust-analyzer/crates/proc-macro-srv-cli \
+  src/tools/rustfmt
 
 
 # A lean image with only what's necessary

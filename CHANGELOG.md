@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+### Changed
+
+- rust=1.80.0
+
 ## [v0.2.3] - 2024-05-02
 
 ### Added

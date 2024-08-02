@@ -50,7 +50,7 @@ RUN apt install -y \
 
 # Clone LLVM
 WORKDIR /root/
-RUN git clone --depth=1 --branch llvmorg-18.1.4 https://github.com/llvm/llvm-project
+RUN git clone --depth=1 --branch llvmorg-18.1.8 https://github.com/llvm/llvm-project
 
 # Build LLVM
 WORKDIR /root/llvm-project/

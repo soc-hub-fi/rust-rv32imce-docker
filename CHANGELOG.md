@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 
 - rust=1.80.0
+- llvm=18.1.8
 
 ## [v0.2.3] - 2024-05-02
 

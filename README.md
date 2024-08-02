@@ -149,12 +149,13 @@ TL;DR:
 3. (podman only) Add to your VS Code settings: `"dev.containers.dockerPath": "podman"`
 4. Make sure the container is running, i.e.,
    `podman run --name rust-rv32emc -dt rust-rv32emc` or `podman start rust-rv32emc`
-5. Then `Command Palette` -> `Dev Containers: Attach to Running Container...`.
-   For first time load, VS Code will take some time to set up the remote
-   container.
+5. Make sure the container is running, i.e., `podman run --name rust-rv32emc -dt rust-rv32emc` or
+   `podman start rust-rv32emc`
+6. Then `Command Palette` -> `Dev Containers: Attach to Running Container...`. For first time load,
+   VS Code will take some time to set up the remote container.
 
-If it doesn't work for you and something else is also required, open an issue
-and I might figure it out.
+If it doesn't work for you and something else is also required, open an issue and I might figure it
+out.
 
 ## Using your SSH keys with the container
 

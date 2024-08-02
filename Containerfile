@@ -1,8 +1,6 @@
 # Build stage: basic development tools
 FROM debian:trixie-slim AS builder
 
-
-WORKDIR /root/
 RUN apt-get update
 RUN apt install -y \
   git \
@@ -31,6 +29,7 @@ RUN apt install -y \
   zlib1g-dev
 
 # Clone RISC-V GCC
+WORKDIR /root/
 RUN git clone --depth=1 --branch 2024.04.12 https://github.com/riscv-collab/riscv-gnu-toolchain
 
 # Build RISC-V cross-compiler

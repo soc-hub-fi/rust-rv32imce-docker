@@ -50,7 +50,7 @@ RUN apt install -y \
 
 # Clone LLVM
 WORKDIR /root/
-RUN git clone --depth=1 --branch llvmorg-18.1.4 https://github.com/llvm/llvm-project
+RUN git clone --depth=1 --branch llvmorg-18.1.8 https://github.com/llvm/llvm-project
 
 # Build LLVM
 WORKDIR /root/llvm-project/
@@ -71,7 +71,7 @@ RUN apt install -y \
 # Clone the Rust compiler
 WORKDIR /opt/
 RUN \
-  git clone --branch 1.77.2 --depth 1 https://github.com/rust-lang/rust && \
+  git clone --branch 1.80.0 --depth 1 https://github.com/rust-lang/rust && \
   cd rust
 
 # Apply patches & configure Rust for build
@@ -129,6 +129,7 @@ RUN apt-get update
 RUN apt install -y \
   binutils \
   git \
+  python3 \
   tmux \
   vim \
   zsh

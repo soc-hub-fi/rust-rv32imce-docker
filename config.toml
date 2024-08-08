@@ -1,6 +1,6 @@
 # Includes one of the default files in src/bootstrap/defaults
 profile = "dist"
-change-id = 102579
+change-id = 125535
 
 [target.x86_64-unknown-linux-gnu]
 llvm-config = "/opt/llvm/bin/llvm-config"
@@ -10,15 +10,19 @@ llvm-config = "/opt/llvm/bin/llvm-config"
 
 [target.riscv32e-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
+cc = "/opt/riscv/bin/riscv32-unknown-elf-gcc"
 
 [target.riscv32ec-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
+cc = "/opt/riscv/bin/riscv32-unknown-elf-gcc"
 
 [target.riscv32em-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
+cc = "/opt/riscv/bin/riscv32-unknown-elf-gcc"
 
 [target.riscv32emc-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
+cc = "/opt/riscv/bin/riscv32-unknown-elf-gcc"
 
 [build]
 target = [

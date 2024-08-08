@@ -129,6 +129,7 @@ RUN apt-get update
 RUN apt install -y \
   binutils \
   git \
+  python3 \
   tmux \
   vim \
   zsh

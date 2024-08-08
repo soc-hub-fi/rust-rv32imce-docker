@@ -7,7 +7,6 @@ llvm-config = "/opt/llvm/bin/llvm-config"
 
 [target.riscv32imc-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"
-cc = "/opt/riscv/bin/riscv32-unknown-elf-gcc"
 
 [target.riscv32e-unknown-none-elf]
 llvm-config = "/opt/llvm/bin/llvm-config"

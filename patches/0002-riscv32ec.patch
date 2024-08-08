@@ -1,12 +1,12 @@
-From 7e21c0f88e954a9be8064e119a5ed0f542619d56 Mon Sep 17 00:00:00 2001
+From 530f223c3337eaac82a791312373bca019aa30a7 Mon Sep 17 00:00:00 2001
 From: Henri Lunnikivi <henri.lunnikivi@tuni.fi>
 Date: Mon, 29 Apr 2024 13:01:26 +0300
 Subject: [PATCH 2/5] riscv32ec
 
 ---
  compiler/rustc_target/src/spec/mod.rs         |  1 +
- .../targets/riscv32ec_unknown_none_elf.rs     | 30 +++++++++++++++++++
- 2 files changed, 31 insertions(+)
+ .../targets/riscv32ec_unknown_none_elf.rs     | 31 +++++++++++++++++++
+ 2 files changed, 32 insertions(+)
  create mode 100644 compiler/rustc_target/src/spec/targets/riscv32ec_unknown_none_elf.rs
 
 diff --git a/compiler/rustc_target/src/spec/mod.rs b/compiler/rustc_target/src/spec/mod.rs
@@ -23,10 +23,10 @@ index b2421cd9..7b0cd2ff 100644
  
 diff --git a/compiler/rustc_target/src/spec/targets/riscv32ec_unknown_none_elf.rs b/compiler/rustc_target/src/spec/targets/riscv32ec_unknown_none_elf.rs
 new file mode 100644
-index 00000000..b5064816
+index 00000000..cd48e966
 --- /dev/null
 +++ b/compiler/rustc_target/src/spec/targets/riscv32ec_unknown_none_elf.rs
-@@ -0,0 +1,30 @@
+@@ -0,0 +1,31 @@
 +use crate::spec::{Cc, LinkerFlavor, Lld, PanicStrategy, RelocModel, Target, TargetOptions};
 +
 +pub fn target() -> Target {
@@ -53,10 +53,11 @@ index 00000000..b5064816
 +            relocation_model: RelocModel::Static,
 +            emit_debug_gdb_scripts: false,
 +            eh_frame_header: false,
++            llvm_abiname: "ilp32e".into(),
 +            ..Default::default()
 +        },
 +    }
 +}
 -- 
-2.37.3.windows.1
+2.34.1
 
